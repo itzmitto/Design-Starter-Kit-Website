@@ -1,0 +1,27 @@
+# Gleam build output and dependency manifest
+/build/
+/manifest.toml
+
+# Lustre development tools and generated bundles
+/.lustre/
+/priv/static/
+
+# JavaScript tooling caches and dependencies, if introduced later
+/node_modules/
+/bun.lockb
+/bun.lock
+/dist/
+
+# Editor and operating system files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Temporary and log files
+*.log
+*.tmp
+*.temp
