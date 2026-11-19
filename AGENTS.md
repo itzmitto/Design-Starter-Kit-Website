@@ -12,7 +12,7 @@
 - Keep static styles and assets under `assets/`.
 - Do not install or download dependencies unless the user explicitly requests it.
 - SCSS, compiled with Dart Sass, is the project's only authored styling language. Do not add Tailwind, CSS-in-JS, CSS frameworks, or styled-components.
-- Keep reusable SCSS tokens and mixins in `assets/_variables.scss` and `assets/_mixins.scss`; author browser styles in SCSS partials or `assets/styles.scss`. Treat generated `assets/styles.css` as build output.
+- Keep reusable SCSS tokens and spacing values in `assets/_variables.scss`, mixins in `assets/_mixins.scss`, and shared library styles in `assets/_library.scss`; author browser styles in SCSS partials or `assets/styles.scss`. Treat generated `assets/styles.css` as build output and never edit it by hand.
 - Future components should use Gleam/Lustre for markup and follow the established component class and SCSS organization.
 
 ## Images and licensing
