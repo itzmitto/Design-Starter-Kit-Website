@@ -45,8 +45,10 @@ pub fn update(model: Model, message: Message) -> Model {
     FilterChanged(filter) -> Model(..model, filter: filter)
     NameChanged(name) -> Model(..model, name: name)
     EmailChanged(email) -> Model(..model, email: email)
-    TermsChanged(terms_accepted) -> Model(..model, terms_accepted: terms_accepted)
-    UpdatesChanged(updates_enabled) -> Model(..model, updates_enabled: updates_enabled)
+    TermsChanged(terms_accepted) ->
+      Model(..model, terms_accepted: terms_accepted)
+    UpdatesChanged(updates_enabled) ->
+      Model(..model, updates_enabled: updates_enabled)
     LoadingStarted -> Model(..model, loading: True)
     LoadingReset -> Model(..model, loading: False)
     ActionSelected(action) -> Model(..model, last_action: action)

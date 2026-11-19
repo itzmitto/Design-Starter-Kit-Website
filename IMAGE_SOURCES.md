@@ -9,4 +9,3 @@ Before adding an image, check its license and keep a record here. Do not use gen
 | Local file | Creator | Source URL | License and terms | Date accessed |
 | --- | --- | --- | --- | --- |
 | `assets/images/workspace.jpg` | Mateusz Dach | [Pexels photo 450035](https://www.pexels.com/photo/computer-set-up-on-a-workspace-450035/) | [Pexels License](https://www.pexels.com/license/), free use; not used as a trademark or endorsement | 2026-11-19 |
-
