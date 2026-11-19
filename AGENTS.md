@@ -11,12 +11,15 @@
 - Prefer small, readable Gleam modules and Lustre's documented APIs.
 - Keep static styles and assets under `assets/`.
 - Do not install or download dependencies unless the user explicitly requests it.
+- SCSS, compiled with Dart Sass, is the project's only authored styling language. Do not add Tailwind, CSS-in-JS, CSS frameworks, or styled-components.
+- Keep reusable SCSS tokens and mixins in `assets/_variables.scss` and `assets/_mixins.scss`; author browser styles in SCSS partials or `assets/styles.scss`. Treat generated `assets/styles.css` as build output.
+- Future components should use Gleam/Lustre for markup and follow the established component class and SCSS organization.
 
 ## Images and licensing
 - Use real internet-sourced images that are free to use under a clearly checked license.
 - Save image files locally under `assets/images/`; do not hotlink them at runtime.
 - Record each image's local filename, creator, source URL, license, and access date in `IMAGE_SOURCES.md`.
-- Do not create generated SVG artwork or SVG placeholders. Do not use generated images as substitutes for sourced photography or artwork.
+- Do not create generated SVG illustrations or SVG placeholders. Use real, freely usable internet images saved locally under `assets/images/`, and check and document each license and source.
 
 ## Verification
 - Do not run installation, dependency download, or build commands unless the user asks.

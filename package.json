@@ -1,0 +1,15 @@
+{
+  "name": "design-starter-kit-website",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Gleam and Lustre design starter kit with Sass styling.",
+  "scripts": {
+    "dev": "concurrently -k -n sass,lustre -c blue,green \"npm:scss -- --watch\" \"gleam run -m lustre/dev start\"",
+    "build": "npm run scss && gleam run -m lustre/dev build",
+    "scss": "sass assets/styles.scss assets/styles.css --no-source-map"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "sass": "^1.93.2"
+  }
+}

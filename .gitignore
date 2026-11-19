@@ -11,6 +11,9 @@
 /bun.lockb
 /bun.lock
 /dist/
+/assets/styles.css
+*.css.map
+.sass-cache/
 
 # Editor and operating system files
 .DS_Store
