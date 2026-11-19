@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "description": "Gleam and Lustre design starter kit with Sass styling.",
   "scripts": {
-    "dev": "concurrently -k -n sass,lustre -c blue,green \"npm:scss -- --watch\" \"env PATH=$HOME/.local/opt/erlang-28/bin:$HOME/.local/bin:$PATH gleam run -m lustre/dev start\"",
+    "dev": "concurrently -k -n sass,site -c blue,green \"npm:scss -- --watch\" \"npm:serve:dev\"",
+    "serve:dev": "npm run build && node scripts/serve.mjs",
     "build": "npm run scss && env PATH=$HOME/.local/opt/erlang-28/bin:$HOME/.local/bin:$PATH gleam run -m lustre/dev build && find dist -type f \\( -name '*.scss' -o -name '.gitkeep' \\) -delete",
     "scss": "sass assets/styles.scss assets/styles.css --no-source-map"
   },
