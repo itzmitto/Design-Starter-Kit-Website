@@ -1,5 +1,5 @@
 import lustre
-import lustre/attribute.{attribute, class, href}
+import lustre/attribute.{class, href, id}
 import lustre/element.{text}
 import lustre/element/html.{a, div, footer, h1, h2, h3, header, main, nav, p, section, span}
 
@@ -38,7 +38,7 @@ fn view(_model) {
       ]),
     ]),
     main([], [
-      section([class("hero"), attribute("id", "home")], [
+      section([class("hero"), id("home")], [
         div([], [
           p([class("hero__eyebrow")], [text("A thoughtful UI library")]),
           h1([], [text("A better starting point for every interface.")]),
@@ -64,7 +64,7 @@ fn view(_model) {
           ]),
         ]),
       ]),
-      section([class("categories"), attribute("id", "components")], [
+      section([class("categories"), id("components")], [
         div([class("categories__inner")], [
           div([class("categories__heading")], [
             h2([], [text("Start with the essentials")]),
@@ -78,7 +78,7 @@ fn view(_model) {
         ]),
       ]),
     ]),
-    footer([class("site-footer"), attribute("id", "about")], [
+    footer([class("site-footer"), id("about")], [
       p([], [text("© 2026 Design Starter Kit")]),
       p([], [text("Made for clear, considered interfaces.")]),
     ]),
