@@ -1,16 +1,32 @@
+@use "variables" as *;
+
 @mixin container {
   width: min(100% - 3rem, 1160px);
   margin-inline: auto;
 }
 
+@mixin button-base {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 670;
+  transition: color 150ms ease, background 150ms ease, border-color 150ms ease, transform 150ms ease;
+
+  &:hover:not(:disabled) { transform: translateY(-1px); }
+  &:disabled { cursor: not-allowed; opacity: 0.75; }
+}
+
 @mixin tablet {
-  @media (max-width: 900px) {
-    @content;
-  }
+  @media (max-width: 900px) { @content; }
 }
 
 @mixin mobile {
-  @media (max-width: 640px) {
-    @content;
-  }
+  @media (max-width: 640px) { @content; }
 }

@@ -1,95 +1,135 @@
 import lustre
-import lustre/attribute.{class, href, id}
+import lustre/attribute.{attribute, class, href, id}
 import lustre/element.{text}
-import lustre/element/html.{a, div, footer, h1, h2, h3, header, main, nav, p, section, span}
+import lustre/element/html.{a, div, footer, h1, h2, header, main as main_element, nav, p, section, small, span, strong}
+import design_starter_kit_website/components
+import design_starter_kit_website/state.{type Category, type Model, All, Buttons, Cards, Forms}
 
 pub fn main() {
-  let app = lustre.simple(init, update, view)
+  let app = lustre.simple(state.init, state.update, view)
   let assert Ok(_) = lustre.start(app, "#app", Nil)
 
   Nil
 }
 
-fn init(_flags) {
-  Nil
-}
-
-type Message {
-  NoOp
-}
-
-fn update(model, _message) {
-  model
-}
-
-fn view(_model) {
-  div([], [
-    header([class("site-header")], [
-      div([class("site-header__inner")], [
-        a([class("brand"), href("#home")], [
-          span([class("brand__mark")], [text("DS")]),
-          text("Design Starter Kit"),
+fn view(model: Model) {
+  div([class("app-shell")], [
+    site_header(),
+    main_element([], [
+      hero(),
+      div([class("library"), id("library")], [
+        div([class("library__top")], [
+          div([], [
+            p([class("eyebrow")], [text("THE LIBRARY")]),
+            p([class("library__count")], [text(component_count(model.filter))]),
+          ]),
+          components.filter_toolbar(model.filter),
         ]),
-        nav([class("nav")], [
-          a([class("is-active"), href("#home")], [text("Home")]),
-          a([href("#components")], [text("Components")]),
-          a([href("#about")], [text("About")]),
-        ]),
+        div([class("library__sections")], sections_for(model)),
       ]),
+      closing_note(),
     ]),
-    main([], [
-      section([class("hero"), id("home")], [
-        div([], [
-          p([class("hero__eyebrow")], [text("A thoughtful UI library")]),
-          h1([], [text("A better starting point for every interface.")]),
-          p([class("hero__description")], [text("Explore a growing collection of practical, polished components built to make your next design feel clear and considered.")]),
-          a([class("button"), href("#components")], [
-            text("Explore components"),
-            span([], [text("→")]),
-          ]),
-        ]),
-        div([class("hero__preview")], [
-          div([class("preview__topline")], [
-            div([class("preview__dots")], [span([], []), span([], []), span([], [])]),
-            text("COMPONENT PREVIEW"),
-          ]),
-          div([class("preview__card")], [
-            p([class("preview__label")], [text("BUTTON STYLES")]),
-            a([class("button button--small"), href("#components")], [text("Primary action")]),
-            div([class("preview__row")], [
-              a([class("button button--small button--outline"), href("#components")], [text("Secondary")]),
-              text("Clear, useful, reusable."),
-            ]),
-            div([class("preview__swatches")], [span([], []), span([], []), span([], []), span([], [])]),
-          ]),
-        ]),
+    site_footer(),
+  ])
+}
+
+fn site_header() {
+  header([class("site-header")], [
+    div([class("site-header__inner")], [
+      a([class("brand"), href("#top"), id("top")], [
+        span([class("brand__mark")], [text("DS")]),
+        span([], [text("Design Starter Kit")]),
       ]),
-      section([class("categories"), id("components")], [
-        div([class("categories__inner")], [
-          div([class("categories__heading")], [
-            h2([], [text("Start with the essentials")]),
-            p([], [text("A small, useful set of foundations for interfaces that feel consistent from the first click.")]),
-          ]),
-          div([class("categories__grid")], [
-            category_card("B", "Buttons", "Thoughtful actions with clear hierarchy, states, and accessible focus."),
-            category_card("C", "Cards", "Flexible surfaces to organize content without adding visual noise."),
-            category_card("F", "Forms", "Friendly fields and controls that make input feel straightforward."),
-          ]),
-        ]),
+      nav([class("site-nav"), attribute("aria-label", "Main navigation")], [
+        a([class("site-nav__link site-nav__link--active"), href("#library")], [text("Library")]),
+        a([class("site-nav__link"), href("#buttons")], [text("Components")]),
+        a([class("site-nav__link"), href("#about")], [text("About")]),
       ]),
-    ]),
-    footer([class("site-footer"), id("about")], [
-      p([], [text("© 2026 Design Starter Kit")]),
-      p([], [text("Made for clear, considered interfaces.")]),
+      a([class("header-action"), href("#library")], [text("Explore library"), span([], [text("↗")])]),
     ]),
   ])
 }
 
-fn category_card(icon: String, title: String, description: String) {
-  a([class("category-card"), href("#components")], [
-    span([class("category-card__icon")], [text(icon)]),
-    h3([], [text(title)]),
-    p([], [text(description)]),
-    span([class("category-card__link")], [text("Browse collection →")]),
+fn hero() {
+  section([class("hero")], [
+    div([class("hero__copy")], [
+      p([class("eyebrow")], [span([class("eyebrow__dot")], []), text("A COMPONENT LIBRARY FOR THOUGHTFUL PRODUCTS")]),
+      h1([class("hero__title")], [text("Good interfaces start with good details.")]),
+      p([class("hero__description")], [text("A growing collection of useful, polished UI patterns. Explore the previews, try the controls, and find a solid starting point for your next idea.")]),
+      a([class("ui-button ui-button--primary hero__cta"), href("#library")], [text("Browse the library"), span([], [text("↓")])]),
+      div([class("hero__proof")], [
+        span([class("proof-dot proof-dot--blue")], []),
+        span([class("proof-dot proof-dot--green")], []),
+        span([class("proof-dot proof-dot--orange")], []),
+        text("Simple patterns. Thoughtfully made."),
+      ]),
+    ]),
+    hero_artwork(),
+  ])
+}
+
+fn hero_artwork() {
+  div([class("hero-art")], [
+    div([class("hero-art__top")], [
+      span([], [text("YOUR NEXT STARTING POINT")]),
+      span([class("hero-art__status")], [text("READY TO USE")]),
+    ]),
+    div([class("hero-art__window")], [
+      div([class("hero-art__window-head")], [
+        span([class("hero-art__avatar")], [text("S")]),
+        div([], [strong([], [text("Soft forms")]), small([], [text("A little more human")])]),
+        span([class("hero-art__menu")], [text("•••")]),
+      ]),
+      div([class("hero-art__field-label")], [text("YOUR EMAIL")]),
+      div([class("hero-art__field")], [text("hello@yourstudio.com")]),
+      div([class("hero-art__actions")], [
+        span([class("hero-art__button")], [text("Continue")]),
+        span([class("hero-art__hint")], [text("No spam, ever")]),
+      ]),
+    ]),
+    div([class("hero-art__note hero-art__note--one")], [span([], [text("Aa")]), text("Clear type")]),
+    div([class("hero-art__note hero-art__note--two")], [span([], [text("✳")]), text("Easy to adapt")]),
+  ])
+}
+
+fn sections_for(model: Model) {
+  case model.filter {
+    All -> [components.button_gallery(model), components.card_gallery(), components.form_gallery(model)]
+    Buttons -> [components.button_gallery(model)]
+    Cards -> [components.card_gallery()]
+    Forms -> [components.form_gallery(model)]
+  }
+}
+
+fn component_count(filter: Category) {
+  case filter {
+    All -> "13 ready-to-explore components"
+    Buttons -> "5 button patterns"
+    Cards -> "4 card patterns"
+    Forms -> "4 form controls"
+  }
+}
+
+fn closing_note() {
+  section([class("closing-note"), id("about")], [
+    div([class("closing-note__mark")], [text("DS")]),
+    div([], [
+      p([class("eyebrow")], [text("MADE TO GROW WITH YOU")]),
+      h2([], [text("A considered starting point for what comes next.")]),
+    ]),
+    p([class("closing-note__copy")], [text("Built with Gleam, Lustre, and a shared love of well-made interface details.")]),
+  ])
+}
+
+fn site_footer() {
+  footer([class("site-footer")], [
+    div([class("site-footer__inner")], [
+      a([class("brand brand--footer"), href("#top")], [
+        span([class("brand__mark")], [text("DS")]),
+        text("Design Starter Kit"),
+      ]),
+      p([], [text("A small library for building better interfaces." )]),
+      span([], [text("© 2026 Design Starter Kit")]),
+    ]),
   ])
 }
