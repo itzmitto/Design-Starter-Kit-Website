@@ -17,6 +17,9 @@ port = 1234
 [tools.lustre.build]
 no_tailwind = true
 
+[tools.lustre.bin]
+bun = "system"
+
 [tools.lustre.html]
 title = "Design Starter Kit"
 lang = "en"

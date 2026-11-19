@@ -304,7 +304,7 @@ fn image_card() {
   article([class("demo-card demo-card--image")], [
     img([
       src("/images/workspace.jpg"),
-      attribute("alt", "Bright shared workspace with tables and chairs"),
+      attribute("alt", "Workspace with computer, monitor, and desk accessories"),
     ]),
     div([], [
       span([class("demo-card__tag")], [text("STUDIO NOTES")]),

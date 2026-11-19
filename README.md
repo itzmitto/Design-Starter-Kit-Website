@@ -10,7 +10,7 @@ The browser application is written in Gleam and targets JavaScript. Lustre provi
 - `npm run scss` compiles SCSS once.
 - `npm run build` compiles SCSS and then builds the Lustre application.
 
-Install the npm dependencies with `npm install` and make sure Gleam is available on `PATH` or in `~/.local/bin`. The browser app targets JavaScript, so Erlang/OTP is not required for this workflow; install Erlang only if adding an Erlang-targeted app or dependency later.
+Install the npm dependencies with `npm install`. The workflow also needs Gleam, Erlang/OTP, rebar3, and Bun available on `PATH` (or in the default `~/.local` locations used by the npm scripts). Although the browser app compiles to JavaScript, Lustre Dev Tools run on the Erlang VM and compile Erlang dependencies with rebar3. No system-wide install is needed if those tools are installed in the user's home directory.
 
 SCSS is the only authored styling language. Keep design tokens, shared mixins, and library component rules in `assets/_variables.scss`, `assets/_mixins.scss`, and `assets/_library.scss`. Future UI components should use Gleam/Lustre for markup and interaction, with styles authored in SCSS; `assets/styles.css` is generated output and must not be edited by hand.
 
